@@ -63,10 +63,19 @@ def test_plot_truth_coords():
     pass
 
 
+def test_create_building_mask():
+    import SpaceNetData.create_building_mask as create_building_mask
 
+    img_path = "/Users/huanglingcao/Data/aws_SpaceNet/AOI_3_Paris_Train/RGB-PanSharpen/RGB-PanSharpen_AOI_3_Paris_img183.tif"
+    # img_path = "/Users/huanglingcao/Data/aws_SpaceNet/AOI_3_Paris_Train/PAN/PAN_AOI_3_Paris_img183.tif"
+    geojson = '/Users/huanglingcao/Data/aws_SpaceNet/AOI_3_Paris_Train/geojson/buildings/buildings_AOI_3_Paris_img183.geojson'
+
+    create_building_mask.create_building_mask(img_path,geojson,npDistFileName='out.tif')
 
 def main():
-    test_plot_truth_coords()
+    # test_plot_truth_coords()
+
+    test_create_building_mask()
 
 
     pass
