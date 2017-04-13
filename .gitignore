@@ -1,0 +1,5 @@
+*.pyc
+
+.idea/
+processLog.txt
+out.tif
