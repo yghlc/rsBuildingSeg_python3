@@ -33,6 +33,7 @@ def plot_truth_coords(input_image, pixel_coords,
         p2 = PatchCollection(patches_nofill, alpha=0.75, match_original=True)
 
     # ax0: raw image
+    # ax0.imshow(input_image,cmap='gray')
     ax0.imshow(input_image)
     if len(patches) > 0:
         ax0.add_collection(p0)

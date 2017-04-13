@@ -9,9 +9,15 @@ import sys
 ####################
 # download spacenet utilities from:
 #  https://github.com/SpaceNetChallenge/utilities/tree/master/python/spaceNet
-path_to_spacenet_utils = '/path/to/spacenet/utils/'
+# suppose current is "rsBuildingSeg"
+# path_to_spacenet_utils = './SpaceNetChallenge/utilities/python/spaceNetUtilities'
+path_to_spacenet_utils = '/Users/huanglingcao/codes/PycharmProjects/rsBuildingSeg/SpaceNetChallenge/utilities/python'
+
 sys.path.extend([path_to_spacenet_utils])
-from spaceNet import geoTools as gT
+# from spaceNet import geoTools as gT
+from spaceNetUtilities import geoTools as gT
+
+
 
 ###############################################################################
 def geojson_to_pixel_arr(raster_file, geojson_file, pixel_ints=True,
@@ -19,6 +25,7 @@ def geojson_to_pixel_arr(raster_file, geojson_file, pixel_ints=True,
     '''
     Tranform geojson file into array of points in pixel (and latlon) coords
     pixel_ints = 1 sets pixel coords as integers
+    verbose = true output data information
     '''
 
     # load geojson file
@@ -71,9 +78,9 @@ def geojson_to_pixel_arr(raster_file, geojson_file, pixel_ints=True,
                     if verbose:
                         print "coord:", coord
                     lon, lat, z = coord
-                    px, py = gT.latLonToPixel(lat, lon, input_raster=src_raster,
+                    px, py = gT.latlon2pixel(lat, lon, input_raster=src_raster,
                                          targetsr=targetsr,
-                                         geomTransform=geom_transform)
+                                         geom_transform=geom_transform)
                     poly_list_pix.append([px, py])
                     if verbose:
                         print "px, py", px, py
@@ -103,9 +110,9 @@ def geojson_to_pixel_arr(raster_file, geojson_file, pixel_ints=True,
                 if verbose:
                     print "coord:", coord
                 lon, lat, z = coord
-                px, py = gT.latLonToPixel(lat, lon, input_raster=src_raster,
+                px, py = gT.latlon2pixel(lat, lon, input_raster=src_raster,
                                      targetsr=targetsr,
-                                     geomTransform=geom_transform)
+                                        geom_transform=geom_transform)
                 poly_list_pix.append([px, py])
                 if verbose:
                     print "px, py", px, py
