@@ -4,14 +4,15 @@
 from osgeo import gdal, osr
 import numpy as np
 import json
-import sys
+import sys,os
 
 ####################
 # download spacenet utilities from:
 #  https://github.com/SpaceNetChallenge/utilities/tree/master/python/spaceNet
 # suppose current is "rsBuildingSeg"
 # path_to_spacenet_utils = './SpaceNetChallenge/utilities/python/spaceNetUtilities'
-path_to_spacenet_utils = '/Users/huanglingcao/codes/PycharmProjects/rsBuildingSeg/SpaceNetChallenge/utilities/python'
+# path_to_spacenet_utils = '/Users/huanglingcao/codes/PycharmProjects/rsBuildingSeg/SpaceNetChallenge/utilities/python'
+path_to_spacenet_utils = os.path.abspath('./SpaceNetChallenge/utilities/python')
 
 sys.path.extend([path_to_spacenet_utils])
 # from spaceNet import geoTools as gT

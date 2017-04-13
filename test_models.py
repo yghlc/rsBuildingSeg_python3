@@ -72,10 +72,23 @@ def test_create_building_mask():
 
     create_building_mask.create_building_mask(img_path,geojson,npDistFileName='out.tif')
 
+def test_create_dist_map():
+    import SpaceNetData.create_dist_map as create_dist_map
+
+    img_path = "/Users/huanglingcao/Data/aws_SpaceNet/AOI_3_Paris_Train/RGB-PanSharpen/RGB-PanSharpen_AOI_3_Paris_img183.tif"
+    # img_path = "/Users/huanglingcao/Data/aws_SpaceNet/AOI_3_Paris_Train/PAN/PAN_AOI_3_Paris_img183.tif"
+    geojson = '/Users/huanglingcao/Data/aws_SpaceNet/AOI_3_Paris_Train/geojson/buildings/buildings_AOI_3_Paris_img183.geojson'
+
+    create_dist_map.create_dist_map(img_path,geojson,npDistFileName='dist_out.tif')
+
+
+
 def main():
     # test_plot_truth_coords()
 
-    test_create_building_mask()
+    # test_create_building_mask()
+
+    test_create_dist_map()
 
 
     pass

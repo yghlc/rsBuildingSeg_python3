@@ -3,3 +3,5 @@
 .idea/
 processLog.txt
 out.tif
+
+*.aux.xml
