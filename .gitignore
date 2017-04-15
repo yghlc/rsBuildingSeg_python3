@@ -5,3 +5,12 @@ processLog.txt
 out.tif
 
 *.aux.xml
+
+SpaceNetData/3band/
+SpaceNetData/all_demo/
+SpaceNetData/building_mask/
+SpaceNetData/building_mask_vis/
+SpaceNetData/distance_trans/
+SpaceNetData/distance_trans_demo/
+SpaceNetData/mask_demo/
+SpaceNetData/pixel_coords_demo/
