@@ -1,7 +1,7 @@
 clear all; close all;
 
 % change values here
-is_server       = 1;
+is_server       = 0;
 
 pos_w          = 3;
 pos_x_std      = 3;
@@ -10,7 +10,9 @@ bi_w      = 3;    %5;
 bi_x_std  = 95;   %50;
 bi_r_std  = 3;    %10;
 
-dataset = 'coco';  %'voc12', 'coco'
+exper_dir = '/home/hlc/Data/deeplab/DeepLab-Context';
+
+dataset = 'voc12';  %'voc12', 'coco'
 
 id         = 'comp6';
 %trainset  = 'trainval_aug';
@@ -20,7 +22,7 @@ trainset   = 'train';
 testset   = 'val';
 %testset    = 'test';            %'val', 'test'
 
-model_name = 'vgg128_noup_pool3';   %'vgg128_noup', 'vgg128_noup_glob', 'vgg128_ms'
+model_name = 'vgg128_noup_pool3';   %'vgg128_noup', 'vgg128_noup_glob', 'vgg128_ms', 'vgg128_noup_pool3'
 feature_name = 'features';        %'features', 'features4', 'features2'
 crf_feature_type = 'fc8_crf';   %'fc8', 'crf', 'fc8_crf'
 fc8_feature_type = 'fc8';
@@ -33,7 +35,7 @@ load('pascal_seg_colormap.mat');
 
 if is_server
   if strcmp(dataset, 'voc12')
-    VOC_root_folder = '/rmt/data/pascal/VOCdevkit';
+    VOC_root_folder = '/home/hlc/Data/VOCdevkit';
   elseif strcmp(dataset, 'coco')
     VOC_root_folder = '/rmt/data/coco';
   else
@@ -41,7 +43,7 @@ if is_server
   end
 else
   if strcmp(dataset, 'voc12')  
-    VOC_root_folder = '~/dataset/PASCAL/VOCdevkit';
+    VOC_root_folder = '/home/hlc/Data/VOCdevkit';
   elseif strcmp(dataset, 'coco')
     VOC_root_folder = '~/dataset/coco';
   else
@@ -53,13 +55,13 @@ crf_post_folder = sprintf('post_densecrf_W%d_XStd%d_RStd%d_PosW%d_PosXStd%d', bi
 fc8_post_folder = 'post_none';
 
 if strcmp(feature_name, 'features')
-  crf_save_root_folder = fullfile('/rmt/work/deeplabel/exper', dataset, 'res', model_name, testset, crf_feature_type, crf_post_folder);
-  fc8_save_root_folder = fullfile('/rmt/work/deeplabel/exper', dataset, 'res', model_name, testset, fc8_feature_type, fc8_post_folder);
-  save_root_folder = fullfile('/rmt/work/deeplabel/exper', dataset, 'res', model_name, testset, save_feature_type);
+  crf_save_root_folder = fullfile(exper_dir, dataset, 'res', model_name, testset, crf_feature_type, crf_post_folder);
+  fc8_save_root_folder = fullfile(exper_dir, dataset, 'res', model_name, testset, fc8_feature_type, fc8_post_folder);
+  save_root_folder = fullfile(exper_dir, dataset, 'res', model_name, testset, save_feature_type);
 else 
-  crf_save_root_folder = fullfile('/rmt/work/deeplabel/exper', dataset, 'res', feature_name, model_name, testset, crf_feature_type, crf_post_folder);
-  fc8_save_root_folder = fullfile('/rmt/work/deeplabel/exper', dataset, 'res', feature_name, model_name, testset, fc8_feature_type, fc8_post_folder);
-  save_root_folder = fullfile('/rmt/work/deeplabel/exper', dataset, 'res', feature_name, model_name, testset, save_feature_type);
+  crf_save_root_folder = fullfile(exper_dir, dataset, 'res', feature_name, model_name, testset, crf_feature_type, crf_post_folder);
+  fc8_save_root_folder = fullfile(exper_dir, dataset, 'res', feature_name, model_name, testset, fc8_feature_type, fc8_post_folder);
+  save_root_folder = fullfile(exper_dir, dataset, 'res', feature_name, model_name, testset, save_feature_type);
 end
 
 if ~exist(save_root_folder, 'dir')

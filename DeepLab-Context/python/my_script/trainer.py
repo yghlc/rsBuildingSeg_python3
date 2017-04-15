@@ -48,7 +48,9 @@ def train_runner(solver, train_set, model):
 
 def trainer(type_=1):
     train, init, solver, train_set = train_variables(type_)
+    # prepare txt file such train.txt which store the training images and ground true file name list
     train_text_maker(train_set)
+    #find and set init model, prepare the train.prototxt and solver.prototxt
     model = train_prototxt_maker(train, init, solver, train_set)
     print 'Training' + str(type_) + ' net ' + os.environ['EXP'] + '/' + os.environ['NET_ID']
     train_runner(solver, train_set, model)

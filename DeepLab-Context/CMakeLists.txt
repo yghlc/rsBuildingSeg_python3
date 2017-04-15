@@ -59,6 +59,11 @@ find_package(Boost 1.46 COMPONENTS system thread REQUIRED)
 include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
 
+find_package(MATIO REQUIRED)
+include_directories(${MATIO_INCLUDE_DIR})
+list(APPEND Caffe_LINKER_LIBS ${MATIO_LIBRARIES})
+
+
 #    CUDA
 if(NOT CPU_ONLY)
     find_package(CUDA 5.5 REQUIRED)

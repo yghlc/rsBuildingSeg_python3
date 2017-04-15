@@ -43,8 +43,12 @@ def test_runner(model, test_set, test_iter, type_):
 def tester(type_=1):
     set_, caffe_, features = test_variables(type_)  
     print 'Testing' + str(type_) + ' net ' + os.environ['EXP'] + '/' + os.environ['NET_ID'] 
+    # set is "val.txt" if type=1, 'val.txt and test.txt' if type = 2
     for test_set in set_:
+        # prepare file list for test
         test_iter = test_txt_maker(test_set)
+        # find model file and prototxt
         model = test_prototext(type_, caffe_, features, test_set)
+
         test_runner(model, test_set, test_iter,type_)
     matlab_result_runner()
