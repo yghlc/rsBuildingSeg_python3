@@ -14,3 +14,7 @@ SpaceNetData/distance_trans/
 SpaceNetData/distance_trans_demo/
 SpaceNetData/mask_demo/
 SpaceNetData/pixel_coords_demo/
+
+DeepLab-Context/.build_release/
+DeepLab-Context/build
+DeepLab-Context/ConfusionMatrix/

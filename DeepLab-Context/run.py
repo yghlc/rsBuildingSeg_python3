@@ -7,7 +7,7 @@ from crf_runner import crf_runner, grid_search
 import tools
 
 # MODIFY PATH for YOUR SETTING
-EXP='voc12' #dataset
+EXP='/home/hlc/Data/deeplab/exper/voc12' #dataset
 #NET_ID='vgg128_noup' #model name
 NET_ID='deeplab_largeFOV' #model name
 #NET_ID='DEEPLAB_ICLR2015paper'
