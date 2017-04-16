@@ -306,9 +306,9 @@ if __name__ == '__main__':
         else:
             skip = 1
             for rasterImage, geoJson in zip(listofRaster, listofgeojson):
-                if skip < 6:
-                    skip = skip + 1
-                    continue
+                # if skip < 6:
+                #     skip = skip + 1
+                #     continue
 
                 chipSummaryList = processRasterChip(rasterImage, srcImageryDirectory,
                                                     geoJson, args.geoJsonDirectory,

@@ -642,6 +642,11 @@ def geoJsonToPASCALVOC2012(xmlFileName, geoJson, rasterImageName, im_id='',
         featureDefn = innerBufferLayer.GetLayerDefn()
         bufferDist = srcRaster.GetGeoTransform()[1]*bufferSizePix
         for idx, feature in enumerate(source_layer):
+            try:
+                ingeom = feature.GetGeometryRef()
+            except:
+                print 'failed in segment: %s'%geoJson
+                continue
             ingeom = feature.GetGeometryRef()
             geomBufferOut = ingeom.Buffer(bufferDist)
             geomBufferIn  = ingeom.Buffer(-bufferDist)
