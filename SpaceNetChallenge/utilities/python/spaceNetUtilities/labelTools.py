@@ -641,37 +641,41 @@ def geoJsonToPASCALVOC2012(xmlFileName, geoJson, rasterImageName, im_id='',
 
         featureDefn = innerBufferLayer.GetLayerDefn()
         bufferDist = srcRaster.GetGeoTransform()[1]*bufferSizePix
-        for idx, feature in enumerate(source_layer):
-            try:
+        try:
+            for idx, feature in enumerate(source_layer):
                 ingeom = feature.GetGeometryRef()
-            except:
-                print 'failed in segment: %s'%geoJson
-                continue
-            ingeom = feature.GetGeometryRef()
-            geomBufferOut = ingeom.Buffer(bufferDist)
-            geomBufferIn  = ingeom.Buffer(-bufferDist)
-            print(geomBufferIn.ExportToWkt())
-            print(geomBufferIn.IsEmpty())
-            print(geomBufferIn.IsSimple())
+                ingeom = feature.GetGeometryRef()
+                geomBufferOut = ingeom.Buffer(bufferDist)
+                geomBufferIn  = ingeom.Buffer(-bufferDist)
+                print(geomBufferIn.ExportToWkt())
+                print(geomBufferIn.IsEmpty())
+                print(geomBufferIn.IsSimple())
 
-            if not geomBufferIn.IsEmpty():
-                outBufFeature = ogr.Feature(featureDefn)
-                outBufFeature.SetGeometry(geomBufferOut)
+                if not geomBufferIn.IsEmpty():
+                    outBufFeature = ogr.Feature(featureDefn)
+                    outBufFeature.SetGeometry(geomBufferOut)
 
-                outerBufferLayer.CreateFeature(outBufFeature)
+                    outerBufferLayer.CreateFeature(outBufFeature)
 
-                inBufFeature = ogr.Feature(featureDefn)
-                inBufFeature.SetGeometry(geomBufferIn)
-                inBufFeature.SetField('objid', idx)
-                innerBufferLayer.CreateFeature(inBufFeature)
+                    inBufFeature = ogr.Feature(featureDefn)
+                    inBufFeature.SetGeometry(geomBufferIn)
+                    inBufFeature.SetField('objid', idx)
+                    innerBufferLayer.CreateFeature(inBufFeature)
 
-                outBufFeature = None
-                inBufFeature = None
+                    outBufFeature = None
+                    inBufFeature = None
 
-
+        except RuntimeError:
+            print 'failed in segment: %s' % geoJson
+            return False
 
         print('writing GTIFF sgcls')
         print('rasterToWrite = {}'.format(xmlFileName.replace('.xml', 'segcls.tif')))
+        #output for test
+        f_obj = open('rasterToWrite.txt','w')
+        f_obj.writelines('rasterToWrite = {}'.format(xmlFileName.replace('.xml', 'segcls.tif')))
+        f_obj.close()
+
         target_ds = gdal.GetDriverByName('GTiff').Create(xmlFileName.replace('.xml', 'segcls.tif'), srcRaster.RasterXSize, srcRaster.RasterYSize, 1, gdal.GDT_Byte)
         print('setTransform')
         target_ds.SetGeoTransform(srcRaster.GetGeoTransform())

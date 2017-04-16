@@ -74,17 +74,21 @@ def processChipSummaryList(chipSummaryList, outputDirectory='', annotationType='
 
 
         if annotationType=='PASCALVOC2012':
-            entry = lT.geoJsonToPASCALVOC2012(annotationName, chipSummary['geoVectorName'], chipSummary['rasterSource'],
-                                              dataset='spacenetV2',
-                                              folder_name='spacenetV2',
-                                              annotationStyle=annotationType,
-                                              segment=True,
-                                              bufferSizePix=0.3,
-                                              convertTo8Bit=convertTo8Bit,
-                                              outputPixType=outputPixType,
-                                              outputFormat=outputFormat,
-                                              bboxResize=bboxResize
-                                              )
+            try:
+                entry = lT.geoJsonToPASCALVOC2012(annotationName, chipSummary['geoVectorName'], chipSummary['rasterSource'],
+                                                  dataset='spacenetV2',
+                                                  folder_name='spacenetV2',
+                                                  annotationStyle=annotationType,
+                                                  segment=True,
+                                                  bufferSizePix=0.3,
+                                                  convertTo8Bit=convertTo8Bit,
+                                                  outputPixType=outputPixType,
+                                                  outputFormat=outputFormat,
+                                                  bboxResize=bboxResize
+                                                  )
+            except:
+                print 'failed in geoJsonToPASCALVOC2012: %s' % chipSummary['chipName']
+                continue
         elif annotationType=='DARKNET':
             entry = lT.geoJsonToDARKNET(annotationName, chipSummary['geoVectorName'], chipSummary['rasterSource'],
                                         dataset='spacenetV2',
@@ -305,10 +309,19 @@ if __name__ == '__main__':
 
         else:
             skip = 1
+            if os.path.isfile('success_save.txt'):
+                f_obj = open('success_save.txt','r')
+                success_list = f_obj.readlines()
+                f_obj.close()
+            else:
+                success_list = []
             for rasterImage, geoJson in zip(listofRaster, listofgeojson):
-                # if skip < 6:
+                # if skip < 10:
                 #     skip = skip + 1
                 #     continue
+                if geoJson+'\n' in success_list:
+                    continue
+
 
                 chipSummaryList = processRasterChip(rasterImage, srcImageryDirectory,
                                                     geoJson, args.geoJsonDirectory,
@@ -329,6 +342,11 @@ if __name__ == '__main__':
                                        )
                 print(entryListTmp)
                 entryList.extend(entryListTmp)
+
+                success_list.append(geoJson+'\n')
+                f_obj = open('success_save.txt', 'w')
+                f_obj.writelines(success_list)
+                f_obj.close()
 
     createTrainTestSplitSummary(entryList,
                                 trainTestSplit=args.trainTestSplit,
