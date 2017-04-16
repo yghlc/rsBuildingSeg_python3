@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # put this file to ${training_data_root}
+# deleted folder need to be created first
 
 id=$(cat rasterToWrite.txt | tail -c 17 | tr -dc '0-9')
 echo $id
