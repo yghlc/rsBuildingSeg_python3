@@ -31,7 +31,7 @@ def rmPointsinGeojson(path,backup_folder):
 
     if hasPoint is True:
         # backup
-        io_function.copyfiletodir(file, backup_folder)
+        io_function.copyfiletodir(path, backup_folder)
 
         fw_obj = open(path,'w')
         # for line in save_lines:
