@@ -27,7 +27,8 @@ training_data_root=${spacenet_root}/${AOI}
 outputDirectory=${output_root}/${AOI}/annotations
 echo ${training_data_root}
 echo ${outputDirectory}
-    #using createDataSpaceNet.py to convert spaceNet file to PASCALVOC2012 format
+exit
+#using createDataSpaceNet.py to convert spaceNet file to PASCALVOC2012 format
     python ${python_script} ${training_data_root} \
            --srcImageryDirectory RGB-PanSharpen
            --outputDirectory ${outputDirectory}/ \

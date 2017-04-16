@@ -12,6 +12,7 @@ def processRasterChip(rasterImage, rasterDescription, geojson, geojsonDescriptio
                       outputPrefix=''):
 
     # cut Image to Size
+    # one image is cut to four images, and each subimage has overlay to others
     chipSummaryList=[]
     if imagePixSize>0:
 
@@ -78,7 +79,7 @@ def processChipSummaryList(chipSummaryList, outputDirectory='', annotationType='
                                               folder_name='spacenetV2',
                                               annotationStyle=annotationType,
                                               segment=True,
-                                              bufferSizePix=2.5,
+                                              bufferSizePix=0.3,
                                               convertTo8Bit=convertTo8Bit,
                                               outputPixType=outputPixType,
                                               outputFormat=outputFormat,
@@ -303,8 +304,11 @@ if __name__ == '__main__':
             break
 
         else:
-
+            skip = 1
             for rasterImage, geoJson in zip(listofRaster, listofgeojson):
+                if skip < 6:
+                    skip = skip + 1
+                    continue
 
                 chipSummaryList = processRasterChip(rasterImage, srcImageryDirectory,
                                                     geoJson, args.geoJsonDirectory,
