@@ -83,7 +83,9 @@ void SoftmaxWithLossLayer<Dtype>::Forward_cpu(
 	loss -= loss_weights_[gt_label] * log(std::max(prob_data[i * dim +
            gt_label * spatial_dim + j], Dtype(FLT_MIN)));
       } else {
-	LOG(FATAL) << "Unexpected label " << gt_label;
+      // modify  for test hlc 2017-4-17
+    LOG(FATAL) << " num: " << num << " dim: "<<dim<<" channels: "<<channels << " Unexpected label: " << gt_label;
+	//LOG(FATAL) << "Unexpected label " << gt_label;
       }
     }
   }
