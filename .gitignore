@@ -3,6 +3,8 @@
 .idea/
 processLog.txt
 out.tif
+success_save.txt
+rasterToWrite.txt
 
 *.aux.xml
 
