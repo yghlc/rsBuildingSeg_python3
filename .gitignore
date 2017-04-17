@@ -5,6 +5,7 @@ processLog.txt
 out.tif
 success_save.txt
 rasterToWrite.txt
+images_list.txt
 
 *.aux.xml
 
