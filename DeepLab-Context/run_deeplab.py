@@ -12,7 +12,7 @@ import os, sys, subprocess
 from optparse import OptionParser
 
 # import model from DeepLab-Context/python/my_script/
-sys.path.insert(0, os.getcwd() + '/DeepLab-Context/python/my_script/')
+sys.path.insert(0, os.getcwd() + '/python/my_script/')
 from tester import tester
 from trainer import trainer
 from crf_runner import crf_runner, grid_search
@@ -20,7 +20,7 @@ import tools
 
 # MODIFY PATH for YOUR SETTING
 # EXP = '/home/hlc/Data/deeplab/exper/voc12'  # dataset
-EXP='/home/hlc/Data/aws_SpaceNet/deeplab_exper/spacenet_rgb'
+EXP='/home/hlc/Data/aws_SpaceNet/deeplab_exper/spacenet_rgb_aoi_2'
 # NET_ID='vgg128_noup' #model name
 NET_ID = 'deeplab_largeFOV'  # model name
 # NET_ID='DEEPLAB_ICLR2015paper'

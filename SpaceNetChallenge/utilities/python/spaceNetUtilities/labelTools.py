@@ -690,7 +690,8 @@ def geoJsonToPASCALVOC2012(xmlFileName, geoJson, rasterImageName, im_id='',
         print('rasterize outer buffer')
         gdal.RasterizeLayer(target_ds, [1], outerBufferLayer, burn_values=[255])
         print('rasterize inner buffer')
-        gdal.RasterizeLayer(target_ds, [1], innerBufferLayer, burn_values=[100])
+        # gdal.RasterizeLayer(target_ds, [1], innerBufferLayer, burn_values=[100])
+        gdal.RasterizeLayer(target_ds, [1], innerBufferLayer, burn_values=[1])  #burn value change to 1, hlc 2017-4-17
         print('writing png sgcls')
         # write to .png
         imageArray = np.array(target_ds.GetRasterBand(1).ReadAsArray())
@@ -1061,7 +1062,8 @@ def geoJsonToSBD(annotationName_cls, annotationName_inst, geoJson, rasterSource,
                  segment=True,
                  convertTo8Bit='',
                  outputPixType='',
-                 outputFormat=''
+                 outputFormat='',
+                bboxResize=''
                  ):
 
     #Print raster file name
