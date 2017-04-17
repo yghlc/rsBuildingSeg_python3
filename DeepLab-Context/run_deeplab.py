@@ -25,9 +25,10 @@ EXP='/home/hlc/Data/aws_SpaceNet/deeplab_exper/spacenet_rgb_aoi_2'
 NET_ID = 'deeplab_largeFOV'  # model name
 # NET_ID='DEEPLAB_ICLR2015paper'
 # NUM_LABELS = 21
-NUM_LABELS = 1
+NUM_LABELS = 2
 YEAR = '2017'
-DATA_ROOT = '/home/hlc/Data/aws_SpaceNet/voc_format/AOI_2_Vegas_Train'
+# DATA_ROOT = '/home/hlc/Data/aws_SpaceNet/voc_format/AOI_2_Vegas_Train'
+DATA_ROOT = ''  # the data file store in text file already use absolute path
 # DATA_ROOT=subprocess.Popen('cd .. && pwd', stdout=subprocess.PIPE, shell=True).communicate()[0][:-1] + '/VOCdevkit/' + YEAR
 OLD_ROOT = ''  # only change if you are changing the path to images
 DEV_ID = 0  # gpu id
@@ -49,7 +50,7 @@ RUN_TRAIN = 1  # Training #1 (on train_aug)
 RUN_TEST = 0  # Test #1 specification (on val or test)
 RUN_TRAIN2 = 0  # Training #2 (finetune on trainval_aug)
 RUN_TEST2 = 0  # Test #2 on official test set
-RUN_SAVE = 0  # Translate and save the model
+RUN_SAVE = 1  # Translate and save the model
 RUN_DENSECRF = 0  # To Run Densecrf
 GRID_SEARCH = 0  # To Run ONLY if you dont know what parameters to use for Densecrf
 

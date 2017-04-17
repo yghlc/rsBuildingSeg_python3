@@ -29,7 +29,7 @@ def saver():#doesnt really save
     cmd = os.environ['CAFFE_DIR'] + os.environ['CAFFE_BIN'] + ' save --model=' + os.environ['CONFIG_DIR'] + '/deploy.prototxt' \
     ' --weights=' + model + ' --out_weight=' + model_deploy
     print 'Running ' + cmd
-    subprocess.call(CMD, shell=True)
+    subprocess.call(cmd, shell=True)
 
 def environment_variable_creator(dic):
 	for key in dic.keys():
