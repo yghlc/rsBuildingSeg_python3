@@ -330,7 +330,7 @@ def get_image_max_min_value(imagepath):
     Args:
         imagepath: image path
 
-    Returns:(max value list, min value list) is successful, (False,False) otherwise
+    Returns:(max value list, min value list) if successful, (False,False) otherwise
 
     """
     max_value = []
@@ -350,6 +350,34 @@ def get_image_max_min_value(imagepath):
         basic.outputlogMessage(str(KeyError))
         pass
     return (False, False)
+
+
+def get_image_mean_value(imagepath):
+    """
+    get image first band max vlaue and min value
+    Args:
+        imagepath: image path
+
+    Returns:(mean value list for each band) if successful, (False) otherwise
+
+    """
+    mean_value = []
+    cmd_list = ['gdalinfo','-json','-stats', '-mm', imagepath]   # Force computation
+    imginfo = basic.exec_command_args_list_one_string(cmd_list)
+    # print imginfo
+    if imginfo is False:
+        return False
+    imginfo_obj = json.loads(imginfo)
+    try:
+        bands_info = imginfo_obj['bands']
+        for band_info in bands_info:
+            mean_value.append(band_info['mean'])
+
+        return mean_value
+    except KeyError:
+        basic.outputlogMessage(str(KeyError))
+        pass
+    return False
 
 
 def get_image_location_value(imagepath,x,y,xy_srs,bandindex):
