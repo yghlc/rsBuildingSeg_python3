@@ -7,6 +7,8 @@ success_save.txt
 rasterToWrite.txt
 images_list.txt
 
+*.test
+*.train
 *.aux.xml
 
 SpaceNetData/3band/
