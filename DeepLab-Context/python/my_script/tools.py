@@ -27,7 +27,7 @@ def saver():#doesnt really save
 
     print 'Translating net ' + os.environ['EXP'] + '/' + os.environ['NET_ID']
     cmd = os.environ['CAFFE_DIR'] + os.environ['CAFFE_BIN'] + ' save --model=' + os.environ['CONFIG_DIR'] + '/deploy.prototxt' \
-    ' --weights=' + model + ' --out_weight=' + model_deploy
+    ' --weights=' + model + ' --out_weights=' + model_deploy
     print 'Running ' + cmd
     subprocess.call(cmd, shell=True)
 
