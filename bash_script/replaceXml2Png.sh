@@ -5,8 +5,13 @@
 # this file run at folder like: voc_format/AOI_2_Vegas_Train
 
 # change the input and output if necessary
-input=trainval.txt
-output=trainval_aug.txt
+arg1=$1
+echo $arg1
+input=${arg1}.txt
+output=${arg1}_aug.txt
+
+echo $input
+echo $output
 
 rm ${output}
 
