@@ -651,9 +651,9 @@ def geoJsonToPASCALVOC2012(xmlFileName, geoJson, rasterImageName, im_id='',
                 print(geomBufferIn.IsEmpty())
                 print(geomBufferIn.IsSimple())
 
-                if not geomBufferIn.IsEmpty():
-                    outBufFeature = ogr.Feature(featureDefn)
-                    outBufFeature.SetGeometry(geomBufferOut)
+            if geomBufferIn.GetArea()>0.0:
+                outBufFeature = ogr.Feature(featureDefn)
+                outBufFeature.SetGeometry(geomBufferOut)
 
                     outerBufferLayer.CreateFeature(outBufFeature)
 

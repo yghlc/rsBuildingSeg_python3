@@ -74,21 +74,17 @@ def processChipSummaryList(chipSummaryList, outputDirectory='', annotationType='
 
 
         if annotationType=='PASCALVOC2012':
-            try:
-                entry = lT.geoJsonToPASCALVOC2012(annotationName, chipSummary['geoVectorName'], chipSummary['rasterSource'],
-                                                  dataset='spacenetV2',
-                                                  folder_name='spacenetV2',
-                                                  annotationStyle=annotationType,
-                                                  segment=True,
-                                                  bufferSizePix=0.3,
-                                                  convertTo8Bit=convertTo8Bit,
-                                                  outputPixType=outputPixType,
-                                                  outputFormat=outputFormat,
-                                                  bboxResize=bboxResize
-                                                  )
-            except:
-                print 'failed in geoJsonToPASCALVOC2012: %s' % chipSummary['chipName']
-                continue
+            entry = lT.geoJsonToPASCALVOC2012(annotationName, chipSummary['geoVectorName'], chipSummary['rasterSource'],
+                                              dataset='spacenetV2',
+                                              folder_name='spacenetV2',
+                                              annotationStyle=annotationType,
+                                              segment=True,
+                                              bufferSizePix=2.5,
+                                              convertTo8Bit=convertTo8Bit,
+                                              outputPixType=outputPixType,
+                                              outputFormat=outputFormat,
+                                              bboxResize=bboxResize
+                                              )
         elif annotationType=='DARKNET':
             entry = lT.geoJsonToDARKNET(annotationName, chipSummary['geoVectorName'], chipSummary['rasterSource'],
                                         dataset='spacenetV2',
