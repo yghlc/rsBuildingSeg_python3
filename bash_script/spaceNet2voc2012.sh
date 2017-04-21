@@ -1,7 +1,7 @@
 #!/bin/bash
 
 spacenet_root=${HOME}/Data/aws_SpaceNet/un_gz
-output_root=${HOME}/Data/aws_SpaceNet/sdb_format
+output_root=${HOME}/Data/aws_SpaceNet/voc_format
 python_script=${HOME}/codes/PycharmProjects/rsBuildingSeg/SpaceNetChallenge/utilities/python/createDataSpaceNet.py
 
 #${spacenet_root}
@@ -31,10 +31,10 @@ echo ${training_data_root}
 echo ${outputDirectory}
 
 #using createDataSpaceNet.py to convert spaceNet file to PASCALVOC2012 format
-#python ${python_script} ${training_data_root} --convertTo8Bit --trainTestSplit 0.7 --srcImageryDirectory RGB-PanSharpen --outputDirectory ${outputDirectory} --annotationType PASCALVOC2012
+python ${python_script} ${training_data_root} --convertTo8Bit --trainTestSplit 0.8 --srcImageryDirectory RGB-PanSharpen --outputDirectory ${outputDirectory} --annotationType PASCALVOC2012
 
 #using createDataSpaceNet.py to convert spaceNet file to SBD format
-python ${python_script} ${training_data_root} --convertTo8Bit --trainTestSplit 0.7 --srcImageryDirectory RGB-PanSharpen --outputDirectory ${outputDirectory} --annotationType SBD
+#python ${python_script} ${training_data_root} --convertTo8Bit --trainTestSplit 0.8 --srcImageryDirectory RGB-PanSharpen --outputDirectory ${outputDirectory} --annotationType SBD
 
 
 done

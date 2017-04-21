@@ -305,18 +305,18 @@ if __name__ == '__main__':
 
         else:
             skip = 1
-            if os.path.isfile('success_save.txt'):
-                f_obj = open('success_save.txt','r')
-                success_list = f_obj.readlines()
-                f_obj.close()
-            else:
-                success_list = []
+            # if os.path.isfile('success_save.txt'):
+            #     f_obj = open('success_save.txt','r')
+            #     success_list = f_obj.readlines()
+            #     f_obj.close()
+            # else:
+            #     success_list = []
             for rasterImage, geoJson in zip(listofRaster, listofgeojson):
                 # if skip < 10:
                 #     skip = skip + 1
                 #     continue
-                if geoJson+'\n' in success_list:
-                    continue
+                # if geoJson+'\n' in success_list:
+                #     continue
 
 
                 chipSummaryList = processRasterChip(rasterImage, srcImageryDirectory,
@@ -339,10 +339,10 @@ if __name__ == '__main__':
                 print(entryListTmp)
                 entryList.extend(entryListTmp)
 
-                success_list.append(geoJson+'\n')
-                f_obj = open('success_save.txt', 'w')
-                f_obj.writelines(success_list)
-                f_obj.close()
+                # success_list.append(geoJson+'\n')
+                # f_obj = open('success_save.txt', 'w')
+                # f_obj.writelines(success_list)
+                # f_obj.close()
 
     createTrainTestSplitSummary(entryList,
                                 trainTestSplit=args.trainTestSplit,
