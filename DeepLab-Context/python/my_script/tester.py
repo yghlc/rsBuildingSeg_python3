@@ -51,4 +51,6 @@ def tester(type_=1):
         model = test_prototext(type_, caffe_, features, test_set)
 
         test_runner(model, test_set, test_iter,type_)
-    matlab_result_runner()
+
+    # don't run matlab  hlc 22 April 2017
+    # matlab_result_runner()

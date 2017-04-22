@@ -3,7 +3,7 @@
 
 function deeplabMat2Png(matfile)
     [pathstr,name,ext] = fileparts(matfile);
-    png_file = strcat(name,'.tif');
+    png_file = strcat(name,'.png');
     save_png =  fullfile(pathstr,png_file);
     
     %load('colormap_building.mat');

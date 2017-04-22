@@ -2,7 +2,7 @@
 from osgeo import gdal, ogr
 import os
 
-def CreateGeoJSON ( fn, cluster, geom, proj ):
+def CreateGeoJSON (folder, fn, cluster, geom, proj ):
     """
 
     :param fn: IMAGE id
@@ -20,11 +20,14 @@ def CreateGeoJSON ( fn, cluster, geom, proj ):
     dst_layername = "BuildingID"
     drv = ogr.GetDriverByName("geojson")
 
-    if os.path.exists('./geojson/' + fn + dst_layername + ".geojson"):
-        drv.DeleteDataSource('./geojson/' + fn + dst_layername + ".geojson")
+    file_name = fn +'_'+ dst_layername + ".geojson"
+    save_path = os.path.join(folder,file_name)
 
-    dst_ds = drv.CreateDataSource ( './geojson/' + fn + dst_layername + ".geojson")
+    if os.path.exists(save_path):
+        drv.DeleteDataSource(save_path)
+
+    dst_ds = drv.CreateDataSource ( save_path)
     dst_layer = dst_ds.CreateLayer( dst_layername, srs=None )
     dst_layer.CreateField( ogr.FieldDefn("DN", ogr.OFTInteger) )
     gdal.Polygonize( band  , None, dst_layer, 0, ['8CONNECTED=8'], callback=None )
-    return
+    return save_path

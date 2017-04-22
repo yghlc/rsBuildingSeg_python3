@@ -51,6 +51,8 @@ class RSImgProclass(object):
             offsetvalue  = struct.unpack('h'*width*height, offsetvaluestr)
         elif image_obj.GetGDALDataType() is 6:  #GDT_Float32
             offsetvalue  = struct.unpack('f'*width*height, offsetvaluestr)
+        elif image_obj.GetGDALDataType() is 1:              #GDT_Byte = 1
+            offsetvalue = struct.unpack('B' * width * height, offsetvaluestr)
         else:
             basic.outputlogMessage('error: not support datatype currently')
             return False

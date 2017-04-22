@@ -17,8 +17,8 @@ except:
 
 
 def dependInit():
-    basic.outputlogMessage('The version of gdal in Python environment is '\
-                            '(maybe not be the same as the one on OS) :' +  gdal.__version__  )
+    # basic.outputlogMessage('The version of gdal in Python environment is '\
+    #                         '(maybe not be the same as the one on OS) :' +  gdal.__version__  )
     # this allows GDAL to throw Python Exceptions
     gdal.UseExceptions()
 
