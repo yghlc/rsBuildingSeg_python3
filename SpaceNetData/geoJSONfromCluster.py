@@ -25,6 +25,7 @@ def CreateGeoJSON (folder, fn, cluster, geom, proj ):
 
     if os.path.exists(save_path):
         drv.DeleteDataSource(save_path)
+        # return save_path  #  for test other part of codes
 
     dst_ds = drv.CreateDataSource ( save_path)
     dst_layer = dst_ds.CreateLayer( dst_layername, srs=None )

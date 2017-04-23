@@ -283,10 +283,15 @@ def createCSVSummaryFile(chipSummaryList, outputFileName, rasterChipDirectory=''
             writerTotal.writerow(['ImageId', 'BuildingId', 'PolygonWKT_Pix', 'Confidence'])
         else:
             writerTotal.writerow(['ImageId', 'BuildingId', 'PolygonWKT_Pix', 'PolygonWKT_Geo'])
-
+        number = 0
         for chipSummary in chipSummaryList:
             chipName = chipSummary['chipName']
-            print(chipName)
+            rasterPrefix = (os.path.basename(chipName)).split('_')[0]
+            replaceImageID = rasterPrefix+'_'
+            number = number+1
+            # if '5717' in chipName or '5834' in chipName:
+            #     test = 1
+            print('%d / %d : %s'%(number,len(chipSummaryList),chipName))
             geoVectorName = chipSummary['geoVectorName']
             #pixVectorName = chipSummary['pixVectorName']
             buildingList = gT.convert_wgs84geojson_to_pixgeojson(geoVectorName,
@@ -296,6 +301,7 @@ def createCSVSummaryFile(chipSummaryList, outputFileName, rasterChipDirectory=''
             if len(buildingList) > 0:
                 for building in buildingList:
                     imageId = os.path.basename(building['ImageId']).replace(replaceImageID, "")
+                    imageId = imageId.replace('_8bit','')
                     if createProposalsFile:
                         writerTotal.writerow([imageId, building['BuildingId'],
                                               building['polyPix'], 1])
@@ -304,6 +310,7 @@ def createCSVSummaryFile(chipSummaryList, outputFileName, rasterChipDirectory=''
                                           building['polyPix'], building['polyGeo']])
             else:
                 imageId = os.path.splitext(os.path.basename(chipName))[0].replace(replaceImageID, "")
+                imageId = imageId.replace('_8bit', '')
                 if createProposalsFile:
                     writerTotal.writerow([imageId, -1,
                                       'POLYGON EMPTY', 1])

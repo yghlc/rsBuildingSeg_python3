@@ -20,6 +20,8 @@ def FixGeoJSON(file_path,save_folder):
     dst_layer = dst_ds.GetLayer(0)
     if os.path.exists(save_path):
         drv.DeleteDataSource(save_path)
+        # return save_path  # for test other part of codes
+
     adst_ds = drv.CreateDataSource (save_path)
     adst_layer = adst_ds.CreateLayer( dst_layername, srs=None )
     adst_layer.CreateField( ogr.FieldDefn("DN", ogr.OFTInteger) )

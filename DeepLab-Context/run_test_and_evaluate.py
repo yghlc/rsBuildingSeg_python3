@@ -173,7 +173,12 @@ def main():
 
     # original raster file list, can get extract imageID
     rasterList = [item[0] for item in test_data]
-    createCSVFromGEOJSON.createCSVFromGEOJSON(rasterList,geojson_list)
+    outputCSVFileName = os.path.join(mat_file_foler,'result_buildings.csv')
+    if createCSVFromGEOJSON.createCSVFromGEOJSON(rasterList,geojson_list,outputCSVFileName) is not True:
+        return False
+
+    # evaluate
+    # use a separate bash file to do evaluate
 
     pass
 

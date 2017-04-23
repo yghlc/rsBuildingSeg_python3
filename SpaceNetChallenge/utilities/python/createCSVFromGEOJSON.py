@@ -24,7 +24,7 @@ def createCSVFromGEOJSON(rasterList,geoJsonList,outputCSVFileName):
         image_path = rasterList[i]
         geojson_path = geoJsonList[i]
         rasterName = os.path.basename(image_path)
-        imageId = os.path.split(rasterName)[0]
+        imageId = os.path.splitext(rasterName)[0]
 
 
         # for stripItem in stripList:
@@ -49,11 +49,12 @@ def createCSVFromGEOJSON(rasterList,geoJsonList,outputCSVFileName):
 
     print("starting")
     lT.createCSVSummaryFile(chipSummaryList, outputCSVFileName,
-                            replaceImageID=rasterPrefix+"_",
-                            createProposalsFile=createProposalFile,
-                            pixPrecision=args.pixelPrecision)
+                            replaceImageID="",
+                            createProposalsFile=False,
+                            pixPrecision=2)
 
     print("finished")
+    return True
 
 
 if __name__ == "__main__":
