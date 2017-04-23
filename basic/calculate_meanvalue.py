@@ -44,9 +44,12 @@ def calculate_mean_of_images(images_list):
         mean_of_images.append(0.0)
     total_pixel = 0
 
+    number = 0
     for image in images_list:
         (width,height,mean_of_band) = cal_the_mean_of_bands(image)
         pixel_count = width*height
+        number = number +1
+        print ('%d / %d'%(number,len(images_list)))
         if width is False:
             return False
         if len(mean_of_band) != band_count:
@@ -62,7 +65,7 @@ def calculate_mean_of_images(images_list):
 
     for i in range(0, band_count):
         basic.outputlogMessage('band {}: mean {}'.format(i+1,mean_of_images[i]))
-    return True
+    return mean_of_images
 
 
 def main(options, args):
