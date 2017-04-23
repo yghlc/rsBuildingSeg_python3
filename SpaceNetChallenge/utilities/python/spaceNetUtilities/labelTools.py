@@ -291,7 +291,7 @@ def createCSVSummaryFile(chipSummaryList, outputFileName, rasterChipDirectory=''
             number = number+1
             # if '5717' in chipName or '5834' in chipName:
             #     test = 1
-            print('%d / %d : %s'%(number,len(chipSummaryList),chipName))
+            print('geojson to csv %d / %d : %s'%(number,len(chipSummaryList),chipName))
             geoVectorName = chipSummary['geoVectorName']
             #pixVectorName = chipSummary['pixVectorName']
             buildingList = gT.convert_wgs84geojson_to_pixgeojson(geoVectorName,

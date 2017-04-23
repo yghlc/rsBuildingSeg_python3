@@ -33,7 +33,9 @@ def test_prototext(type_, caffe_, features, test_set):
     return model
 
 def test_runner(model, test_set, test_iter, type_):
-    matlab_path_editor(type_)
+
+    #matlab_path_editor(type_)
+
     cmd = os.environ['CAFFE_DIR'] + os.environ['CAFFE_BIN'] + ' test --model=' + os.environ['CONFIG_DIR'] + '/test_' + test_set + '.prototxt' \
     ' --weights=' + model + ' --gpu=' + os.environ['DEV_ID'] + ' --iterations=' + str(test_iter)
     print 'Running ' + cmd

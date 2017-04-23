@@ -36,8 +36,8 @@ def environment_variable_creator(dic):
 		os.environ[key] = str(dic[key])
 
 def mkdir():
-	CAFFE_DIR='./'
-	CAFFE_BIN='.build_release/tools/caffe.bin'
+	CAFFE_DIR= os.environ['DEEPLAB']
+	CAFFE_BIN='/.build_release/tools/caffe.bin'
 
 	CONFIG_DIR=os.environ['EXP'] + '/config/' + os.environ['NET_ID']
 	MODEL_DIR=os.environ['EXP'] + '/model/' + os.environ['NET_ID']

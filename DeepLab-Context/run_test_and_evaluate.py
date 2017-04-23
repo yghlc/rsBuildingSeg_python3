@@ -9,31 +9,59 @@ email:huanglingcao@gmail.com
 add time: 22 April, 2017
 """
 
+import os,sys
+# modify this if necessary
+codes_path = '/home/hlc/codes/PycharmProjects/rsBuildingSeg'
+sys.path.insert(0, codes_path)
+
+# modify this if necessary
+expr='/media/hlc/DATA/Data_lingcao/aws_SpaceNet/deeplab_exper/spacenet_rgb_aoi_2'
+gpuid = 0
+NET_ID = 'deeplab_largeFOV'  # model name
+
+
+sys.path.insert(0, codes_path+'/DeepLab-Context')
+sys.path.insert(0,codes_path+'/DeepLab-Context/python/my_script/')
+
+os.environ['DEEPLAB'] = codes_path+'/DeepLab-Context'
+print os.environ['DEEPLAB']
 import run_deeplab
-import os,sys, subprocess,numpy
+import subprocess,numpy
 
 from PIL import Image
 
-#sys.path.insert(0, os.getcwd() + '../basic')
 import basic.basic as basic
 import basic.io_function as io_function
 from basic.RSImage import RSImageclass
 from basic.RSImageProcess import RSImgProclass
+import basic.mat_To_png as mat_To_png
 
-#sys.path.insert(0, os.getcwd() + '../SpaceNetData')
+# sys.path.insert(0, codes_path + '/SpaceNetData')
 import SpaceNetData.geoJSONfromCluster as geoJSONfromCluster
 import SpaceNetData.FixGeoJSON as FixGeoJSON
 
 #sys.path.insert(0, os.getcwd() + '../SpaceNetChallenge/')
 import SpaceNetChallenge.utilities.python.createCSVFromGEOJSON as createCSVFromGEOJSON
 
-test_file = '/media/hlc/DATA/Data_lingcao/aws_SpaceNet/deeplab_exper/spacenet_rgb_aoi_2/list/val.txt'
+
+if os.path.isdir(expr) is False:
+    print 'error, % not exist '%expr
+    exit(1)
+
+run_deeplab.EXP = expr
+run_deeplab.DEV_ID = gpuid
+run_deeplab.NET_ID = NET_ID
+
+test_file = expr+'/list/val.txt'
 # id is need in caffe for output result
-test_file_id = '/media/hlc/DATA/Data_lingcao/aws_SpaceNet/deeplab_exper/spacenet_rgb_aoi_2/list/val_id.txt'
+test_file_id = expr+'/list/val_id.txt'
 
-mat_file_foler = '/media/hlc/DATA/Data_lingcao/aws_SpaceNet/deeplab_exper/spacenet_rgb_aoi_2/features/deeplab_largeFOV/val/fc8'
+# need to change the mean value and cropsize
+test_prototxt_tem = os.path.join(expr,'config',NET_ID,'test.prototxt')
 
-codes_path = '/home/hlc/codes/PycharmProjects/rsBuildingSeg'
+mat_file_foler = expr+'/features/'+NET_ID+ '/val/fc8'
+
+
 
 
 test_data = []
@@ -76,15 +104,20 @@ def run_test():
 
     pass
 
-def convert_mat_to_png(b_runmatlab=True):
+def convert_mat_to_png(mat_folder, b_runmatlab=True):
+
     # need to run matlab script
-    original_path = str(os.getcwd())
-    path = os.path.join(codes_path,'DeepLab-Context','matlab','my_script')
-    os.chdir(path)
-    # convert the mat files to png or tif
-    if b_runmatlab :
-        subprocess.call("matlab -r 'converttoPng; exit;'", shell=True)
-    os.chdir(original_path)
+    # original_path = str(os.getcwd())
+    # path = os.path.join(codes_path,'DeepLab-Context','matlab','my_script')
+    # os.chdir(path)
+    # # convert the mat files to png or tif
+    # if b_runmatlab :
+    #     subprocess.call("matlab -r 'converttoPng; exit;'", shell=True)
+    # os.chdir(original_path)
+
+    # using python script instead of matlab script
+    if mat_To_png.convert_mat_to_png(mat_folder) is False:
+        return False
 
     # read the png or tif files list
     result = io_function.get_file_list_by_ext('.tif',mat_file_foler,bsub_folder=False)
@@ -126,7 +159,7 @@ def convert_png_result_to_geojson(result_list):
         if result_file not in result_list:
             basic.outputlogMessage('result_file file not in the list %s'%result_file)
             return False
-        basic.outputlogMessage('%d :Convert file: %s'%(i+1,os.path.basename(result_file)))
+        basic.outputlogMessage('png to geojson: %d / %d :Convert file: %s'%(i+1, len(result_list),os.path.basename(result_file)))
 
         prj = rsimg_obj.GetProjection()
         geom = rsimg_obj.GetGeoTransform()
@@ -158,11 +191,11 @@ def main():
     if read_test_data(test_file,test_file_id) is False:
         return False
 
-    # run_test()
+    run_test()
 
     # get the deeplab output result, in png or tif format
     # result_list = convert_mat_to_png()
-    result_list = convert_mat_to_png(b_runmatlab=False)
+    result_list = convert_mat_to_png(mat_file_foler,b_runmatlab=True)
     if result_list is False:
         return False
 
