@@ -7,7 +7,8 @@ from distutils.dir_util import copy_tree
 
 def model_finder(path, type_=1):
 	mtime = lambda f: os.stat(f).st_mtime
-	files = list(sorted(glob.glob(path+'/' + os.environ['MODEL'] + '_*.caffemodel'), key=mtime))
+	# files = list(sorted(glob.glob(path+'/' + os.environ['MODEL'] + '_*.caffemodel'), key=mtime))
+	files = list(sorted(glob.glob(path + '/' + os.environ['MODEL'] + '*.caffemodel'), key=mtime))   # hlc 20170425
 	if len(files) >= 1:
 		file_ = files[-1]
 	else:
@@ -40,30 +41,32 @@ def environment_variable_creator(dic):
 
 def initializer():
 	mkdir()
-	get_urls()
+	# get_urls()
 
 	current_path = os.getcwd()
 
-	try:
-		config_path = current_path + '/config/' + os.environ['MODEL']
-		copy_tree(config_path, os.environ['CONFIG_DIR'])
-	except:
-		print "\n you entered an invalid model \n"
+    # no need to do following copy step, I already prepared it   hlc  25-april-2017
 
-	model_path = current_path + '/init'
-	copy_tree(model_path, os.environ['MODEL_DIR'])
-
-	try:
-		list_path = current_path + '/list/' + os.environ['year'][-4:]
-		copy_tree(list_path, os.environ['LIST_DIR'])
-	except:
-		print "\n you entered an invalid year. \n"
+	# try:
+	# 	config_path = current_path + '/config/' + os.environ['MODEL']
+	# 	copy_tree(config_path, os.environ['CONFIG_DIR'])
+	# except:
+	# 	print "\n you entered an invalid model \n"
+    #
+	# model_path = current_path + '/init'
+	# copy_tree(model_path, os.environ['MODEL_DIR'])
+    #
+	# try:
+	# 	list_path = current_path + '/list/' + os.environ['year'][-4:]
+	# 	copy_tree(list_path, os.environ['LIST_DIR'])
+	# except:
+	# 	print "\n you entered an invalid year. \n"
 
 
 
 def mkdir():
-	CAFFE_DIR='./'
-	CAFFE_BIN='.build_release/tools/caffe.bin'
+	CAFFE_DIR= os.environ['DEEPLAB']
+	CAFFE_BIN= '/.build_release/tools/caffe.bin'
 
 	CONFIG_DIR=os.environ['EXP'] + '/config/' + os.environ['NET_ID']
 	MODEL_DIR=os.environ['EXP'] + '/model/' + os.environ['NET_ID']

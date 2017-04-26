@@ -6,7 +6,10 @@ from tools import model_finder, file_editor
 def train_variables(type_):
     print os.environ['MODEL']
     train = 'train' if type_==1 else 'trainval'
-    init = '/init_' + os.environ['MODEL'] + '.caffemodel' if type_==1 else '/init2_' + os.environ['MODEL'] + '.caffemodel'
+    # init = '/init_' + os.environ['MODEL'] + '.caffemodel' if type_==1 else '/init2_' + os.environ['MODEL'] + '.caffemodel'
+    # remove underscore of init
+    init = '/init' + os.environ['MODEL'] + '.caffemodel' if type_ == 1 else '/init2' + os.environ[
+        'MODEL'] + '.caffemodel'
     solver = 'solver' if type_==1 else 'solver2'
     train_set=train + os.environ['train_set_SUFFIX']
     return train, init, solver, train_set

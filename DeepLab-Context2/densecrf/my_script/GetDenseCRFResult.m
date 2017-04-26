@@ -32,8 +32,8 @@ map_dir = dir(fullfile(map_folder, '*.bin'));
 
 fprintf(1,' saving to %s\n', save_root_folder);
 
-if strcmp(dataset, '{EXP}')
-  year_path = strcat('/results/', '{YEAR}', '/');
+if strcmp(dataset, '/media/hlc/DATA/Data_lingcao/aws_SpaceNet/deeplab_exper/spacenet_rgb_aoi_2')
+  year_path = strcat('/results/', 'VOC2012', '/');
   seg_res_dir = [save_root_folder year_path];
 elseif strcmp(dataset, 'coco')
   seg_res_dir = [save_root_folder, '/results/COCO2014/'];
