@@ -20,11 +20,12 @@ from deeplab_resnet import DeepLabResNetModel, ImageReader, decode_labels, inv_p
 
 IMG_MEAN = np.array((75.2090867532,85.9504283117,95.685), dtype=np.float32)
 
-BATCH_SIZE = 10
-DATA_DIRECTORY = '/home/VOCdevkit'
+BATCH_SIZE = 2
+DATA_DIRECTORY = ''
 DATA_LIST_PATH = './dataset/train.txt'
 IGNORE_LABEL = 255
-INPUT_SIZE = '321,321'
+# INPUT_SIZE = '321,321'
+INPUT_SIZE = '650,650'
 LEARNING_RATE = 2.5e-4
 MOMENTUM = 0.9
 NUM_CLASSES = 21
