@@ -1,11 +1,13 @@
 from osgeo import gdal, osr, ogr, gdalnumeric
 import numpy as np
 import os,sys
-code_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)))
+code_dir = os.path.dirname(os.path.abspath(__file__))
+print(code_dir)
 sys.path.insert(0, code_dir)
 import geoTools as gT
 import math
-import cPickle as pickle
+# import cPickle as pickle
+import pickle    # the verion in python3
 import csv
 import glob
 from PIL import Image
