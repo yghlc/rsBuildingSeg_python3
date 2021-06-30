@@ -385,8 +385,8 @@ def createCSVSummaryFromDirectory(geoJsonDirectory, rasterFileDirectoryList,
         for idx, rasterFile in enumerate(rasterFileDirectoryList):
             bandName = imageId.replace('.geojson', '.tif')
             bandName = bandName.replace('Geo_', rasterFile[1]+'_')
-            print imageId
-            print os.path.join(rasterFile[0], bandName)
+            print(imageId)
+            print(os.path.join(rasterFile[0], bandName))
             chipSummaryBand = {'chipName': os.path.join(rasterFile[0], bandName),
                                 'geoVectorName': os.path.join(geoJsonDirectory, imageId),
                                 'imageId': os.path.splitext(imageId)[0]}
@@ -394,14 +394,14 @@ def createCSVSummaryFromDirectory(geoJsonDirectory, rasterFileDirectoryList,
             chipsSummaryList[idx].append(chipSummaryBand)
 
 
-    print "starting"
+    print("starting")
     for idx, rasterFile in enumerate(rasterFileDirectoryList):
         createCSVSummaryFile(chipsSummaryList[idx], os.path.join(outputDirectory,
                                                                  outputbaseName+'_'+rasterFile[1]+'.csv'),
                             replaceImageID=rasterFile[1]+'_')
 
 
-    print "finished"
+    print("finished")
 
 
 
