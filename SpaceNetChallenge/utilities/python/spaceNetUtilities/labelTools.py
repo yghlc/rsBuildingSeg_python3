@@ -1,6 +1,8 @@
 from osgeo import gdal, osr, ogr, gdalnumeric
 import numpy as np
 import os
+code_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
+sys.path.insert(0, code_dir)
 import geoTools as gT
 import math
 import cPickle as pickle
