@@ -281,7 +281,7 @@ if __name__ == '__main__':
         fullPathAnnotationsDirectory = args.outputDirectory
 
     for aoiSubDir in listOfAOIs:
-        fullPathSubDir = os.path.join(srcSpaceNetDirectory, aoiSubDir)
+        fullPathSubDir = srcSpaceNetDirectory #os.path.join(srcSpaceNetDirectory, aoiSubDir)
 
         ## Create Annotations directory
         #fullPathAnnotationsDirectory = os.path.join(fullPathSubDir, annotationsDirectory)
