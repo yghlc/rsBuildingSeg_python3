@@ -211,7 +211,7 @@ def returnBoundBox(xOff, yOff, pixDim, inputRaster, targetSR='', pixelSpace=Fals
              yOff - pixDim / 2, yOff - pixDim / 2]
 
     ring = ogr.Geometry(ogr.wkbLinearRing)
-    for idx in xrange(len(xCord)):
+    for idx in range(len(xCord)):
         if pixelSpace == False:
             geom = pixelToGeoCoord(xCord[idx], yCord[idx], inputRaster)
             ring.AddPoint(geom[0], geom[1], 0)
@@ -332,7 +332,7 @@ def geoPolygonToPixelPolygonWKT(geom, inputRaster, targetSR, geomTransform, brea
             # GetPoint returns a tuple not a Geometry
             ringPix = ogr.Geometry(ogr.wkbLinearRing)
 
-            for pIdx in xrange(ring.GetPointCount()):
+            for pIdx in range(ring.GetPointCount()):
                 lon, lat, z = ring.GetPoint(pIdx)
                 xPix, yPix = latlon2pixel(lat, lon, inputRaster, targetSR, geomTransform)
 
@@ -352,7 +352,7 @@ def geoPolygonToPixelPolygonWKT(geom, inputRaster, targetSR, geomTransform, brea
                 # GetPoint returns a tuple not a Geometry
                 ringPix = ogr.Geometry(ogr.wkbLinearRing)
 
-                for pIdx in xrange(ring.GetPointCount()):
+                for pIdx in range(ring.GetPointCount()):
                     lon, lat, z = ring.GetPoint(pIdx)
                     xPix, yPix = latlon2pixel(lat, lon, inputRaster, targetSR, geomTransform)
 
@@ -393,7 +393,7 @@ def pixelWKTToGeoWKT(geomWKT, inputRaster, targetSR='', geomTransform='', breakM
             # GetPoint returns a tuple not a Geometry
             ringGeo = ogr.Geometry(ogr.wkbLinearRing)
 
-            for pIdx in xrange(ring.GetPointCount()):
+            for pIdx in range(ring.GetPointCount()):
                 xPix, yPix, zPix = ring.GetPoint(pIdx)
                 #xPix, yPix = latlon2pixel(lat, lon, inputRaster, targetSR, geomTransform)
                 lon, lat = pixelToGeoCoord(xPix, yPix, inputRaster=inputRaster, targetSR=targetSR, geomTransform=geomTransform)
@@ -411,7 +411,7 @@ def pixelWKTToGeoWKT(geomWKT, inputRaster, targetSR='', geomTransform='', breakM
                 # GetPoint returns a tuple not a Geometry
                 ringGeo = ogr.Geometry(ogr.wkbLinearRing)
 
-                for pIdx in xrange(ring.GetPointCount()):
+                for pIdx in range(ring.GetPointCount()):
                     xPix, yPix, zPix = ring.GetPoint(pIdx)
                     # xPix, yPix = latlon2pixel(lat, lon, inputRaster, targetSR, geomTransform)
                     lon, lat = pixelToGeoCoord(xPix, yPix, inputRaster=inputRaster, targetSR=targetSR,
@@ -428,7 +428,7 @@ def pixelWKTToGeoWKT(geomWKT, inputRaster, targetSR='', geomTransform='', breakM
 
     elif geom.GetGeometryName() == 'LINESTRING':
         lineGeo = ogr.Geometry(ogr.wkbLineString)
-        for pIdx in xrange(geom.GetPointCount()):
+        for pIdx in range(geom.GetPointCount()):
             xPix, yPix, zPix = geom.GetPoint(pIdx)
             lon, lat = pixelToGeoCoord(xPix, yPix, inputRaster=inputRaster, targetSR=targetSR,
                                        geomTransform=geomTransform)
@@ -439,7 +439,7 @@ def pixelWKTToGeoWKT(geomWKT, inputRaster, targetSR='', geomTransform='', breakM
     elif geom.GetGeometryName() == 'POINT':
         pointGeo = ogr.Geometry(ogr.wkbPoint)
 
-        for pIdx in xrange(geom.GetPointCount()):
+        for pIdx in range(geom.GetPointCount()):
             xPix, yPix, zPix = geom.GetPoint(pIdx)
             lon, lat = pixelToGeoCoord(xPix, yPix, inputRaster=inputRaster, targetSR=targetSR,
                                        geomTransform=geomTransform)
@@ -475,7 +475,7 @@ def geoWKTToPixelWKT(geom, inputRaster, targetSR, geomTransform, pixPrecision=2)
             # GetPoint returns a tuple not a Geometry
             ringPix = ogr.Geometry(ogr.wkbLinearRing)
 
-            for pIdx in xrange(ring.GetPointCount()):
+            for pIdx in range(ring.GetPointCount()):
                 lon, lat, z = ring.GetPoint(pIdx)
                 xPix, yPix = latlon2pixel(lat, lon, inputRaster, targetSR, geomTransform)
 
@@ -495,7 +495,7 @@ def geoWKTToPixelWKT(geom, inputRaster, targetSR, geomTransform, pixPrecision=2)
                 # GetPoint returns a tuple not a Geometry
                 ringPix = ogr.Geometry(ogr.wkbLinearRing)
 
-                for pIdx in xrange(ring.GetPointCount()):
+                for pIdx in range(ring.GetPointCount()):
                     lon, lat, z = ring.GetPoint(pIdx)
                     xPix, yPix = latlon2pixel(lat, lon, inputRaster, targetSR, geomTransform)
 
@@ -508,7 +508,7 @@ def geoWKTToPixelWKT(geom, inputRaster, targetSR, geomTransform, pixPrecision=2)
                 geom_list.append([polygonPixBuffer, geom])
     elif geom.GetGeometryName() == 'LINESTRING':
         line = ogr.Geometry(ogr.wkbLineString)
-        for pIdx in xrange(geom.GetPointCount()):
+        for pIdx in range(geom.GetPointCount()):
             lon, lat, z = geom.GetPoint(pIdx)
             xPix, yPix = latlon2pixel(lat, lon, inputRaster, targetSR, geomTransform)
 
@@ -519,7 +519,7 @@ def geoWKTToPixelWKT(geom, inputRaster, targetSR, geomTransform, pixPrecision=2)
 
     elif geom.GetGeometryName() == 'POINT':
         point = ogr.Geometry(ogr.wkbPoint)
-        for pIdx in xrange(geom.GetPointCount()):
+        for pIdx in range(geom.GetPointCount()):
             lon, lat, z = geom.GetPoint(pIdx)
             xPix, yPix = latlon2pixel(lat, lon, inputRaster, targetSR, geomTransform)
 
