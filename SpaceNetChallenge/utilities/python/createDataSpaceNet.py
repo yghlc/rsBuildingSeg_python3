@@ -298,6 +298,8 @@ if __name__ == '__main__':
 
         print('fullpathImageDirectory = {}'.format(fullPathImageDirectory))
         print('fullpathGeoJsonDirectory = {}'.format(fullPathGeoJsonDirectory))
+        print('Number of Raster: %d'%len(listofRaster))
+        print('Number of geojson: %d'%len(listofgeojson))
         if len(listofRaster) != len(listofgeojson):
             print('Error lists do not match fix source errors')
 
